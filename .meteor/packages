@@ -1,0 +1,35 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+autopublish
+less
+fortawesome:fontawesome
+jquery
+dbarrett:dropzonejs
+
+twbs:bootstrap@3.3.6
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+random
+ejson
+check
+standard-minifier-css
+standard-minifier-js
+kadira:flow-router
+kadira:blaze-layout
+reactive-var
+es5-shim
+ecmascript
+flawless:meteor-toastr
+natestrauser:select2
+dangrossman:bootstrap-daterangepicker
+rzymek:fullcalendar
