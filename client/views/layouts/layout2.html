@@ -10,9 +10,14 @@
             {{> topNavigation }}
 
             <!-- Main view  -->
-            {{> yield}}
+           {{>Template.dynamic template=content}}
 
         </div>
+      
+      <!-- End page wrapper-->
+      
+      <!-- Right Sidebar -->
+      {{> rightSidebar }}
     </div>
 
 </template>

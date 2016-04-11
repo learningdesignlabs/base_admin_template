@@ -1,3 +1,6 @@
+import { Template } from 'meteor/templating';
+import './ibox-tools.html';
+
 Template.iboxTools.events({
 
     'click .collapse-link': function (event) {
@@ -18,6 +21,19 @@ Template.iboxTools.events({
         var element = $(event.target);
         var content = element.closest('div.ibox');
         content.remove();
+
+    },
+
+    'click .fullscreen-link': function (event) {
+        var element = $(event.target);
+        var ibox = element.closest('div.ibox');
+        var button = element.closest("i");
+        $('body').toggleClass('fullscreen-ibox-mode');
+        button.toggleClass('fa-expand').toggleClass('fa-compress');
+        ibox.toggleClass('fullscreen');
+        setTimeout(function() {
+            $(window).trigger('resize');
+        }, 100);
 
     }
 });

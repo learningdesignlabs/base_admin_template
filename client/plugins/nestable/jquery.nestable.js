@@ -27,23 +27,25 @@
     })();
 
     var defaults = {
-        listNodeName    : 'ol',
-        itemNodeName    : 'li',
-        rootClass       : 'dd',
-        listClass       : 'dd-list',
-        itemClass       : 'dd-item',
-        dragClass       : 'dd-dragel',
-        handleClass     : 'dd-handle',
-        collapsedClass  : 'dd-collapsed',
-        placeClass      : 'dd-placeholder',
-        noDragClass     : 'dd-nodrag',
-        emptyClass      : 'dd-empty',
-        expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
-        collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
-        group           : 0,
-        maxDepth        : 5,
-        threshold       : 20
-    };
+            listNodeName    : 'ol',
+            itemNodeName    : 'li',
+            rootClass       : 'dd',
+            listClass       : 'dd-list',
+            itemClass       : 'dd-item',
+            dragClass       : 'dd-dragel',
+            handleClass     : 'dd-handle',
+            collapsedClass  : 'dd-collapsed',
+            placeClass      : 'dd-placeholder',
+            noDragClass     : 'dd-nodrag',
+            emptyClass      : 'dd-empty',
+            expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
+            collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
+            group           : 0,
+            maxDepth        : 5,
+            threshold       : 20,
+            clone           : false,
+            insertable      : true
+        };
 
     function Plugin(element, options)
     {
@@ -62,6 +64,7 @@
             list.reset();
 
             list.el.data('nestable-group', this.options.group);
+            list.el.data('nestable-insertable', this.options.insertable);
 
             list.placeEl = $('<div class="' + list.options.placeClass + '"/>');
 
@@ -87,10 +90,13 @@
             var onStartEvent = function(e)
             {
                 var handle = $(e.target);
-                if (!handle.hasClass(list.options.handleClass)) {
-                    if (handle.closest('.' + list.options.noDragClass).length) {
+
+                if (handle.closest('.' + list.options.noDragClass).length) {
                         return;
                     }
+
+                if (!handle.hasClass(list.options.handleClass)) {
+
                     handle = handle.closest('.' + list.options.handleClass);
                 }
 
@@ -141,22 +147,22 @@
             var data,
                 depth = 0,
                 list  = this;
-            step  = function(level, depth)
-            {
-                var array = [ ],
-                    items = level.children(list.options.itemNodeName);
-                items.each(function()
+                step  = function(level, depth)
                 {
-                    var li   = $(this),
-                        item = $.extend({}, li.data()),
-                        sub  = li.children(list.options.listNodeName);
-                    if (sub.length) {
-                        item.children = step(sub, depth + 1);
-                    }
-                    array.push(item);
-                });
-                return array;
-            };
+                    var array = [ ],
+                        items = level.children(list.options.itemNodeName);
+                    items.each(function()
+                    {
+                        var li   = $(this),
+                            item = $.extend({}, li.data()),
+                            sub  = li.children(list.options.listNodeName);
+                        if (sub.length) {
+                            item.children = step(sub, depth + 1);
+                        }
+                        array.push(item);
+                    });
+                    return array;
+                };
             data = step(list.el.find(list.options.listNodeName).first(), depth);
             return data;
         },
@@ -265,9 +271,16 @@
             this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
             this.dragEl.css('width', dragItem.width());
 
-            dragItem.after(this.placeEl);
-            dragItem[0].parentNode.removeChild(dragItem[0]);
-            dragItem.appendTo(this.dragEl);
+            if(this.options.insertable){
+                dragItem.after(this.placeEl);
+            }
+            if(this.options.clone){
+                dragItem.clone().appendTo(this.dragEl);
+            } else {
+                /* appendTo(obj) also remove obj
+                dragItem[0].parentNode.removeChild(dragItem[0]); */
+                dragItem.appendTo(this.dragEl);
+            }
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({
@@ -416,6 +429,10 @@
             var pointElRoot = this.pointEl.closest('.' + opt.rootClass),
                 isNewRoot   = this.dragRootEl.data('nestable-id') !== pointElRoot.data('nestable-id');
 
+            if(!pointElRoot.data('nestable-insertable')) {
+                return;
+            }
+
             /**
              * move vertical
              */
@@ -430,7 +447,7 @@
                     return;
                 }
                 var before = e.pageY < (this.pointEl.offset().top + this.pointEl.height() / 2);
-                parent = this.placeEl.parent();
+                    parent = this.placeEl.parent();
                 // if empty create new list to replace empty placeholder
                 if (isEmpty) {
                     list = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);

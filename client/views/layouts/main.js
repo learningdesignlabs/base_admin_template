@@ -1,4 +1,7 @@
-Template.mainLayout.rendered = function(){
+import { Template } from 'meteor/templating';
+import './main.html';
+
+Template.mainLayout.onRendered(function(){
 
     // Minimalize menu when screen is less than 768px
     $(window).bind("resize load", function () {
@@ -37,7 +40,7 @@ Template.mainLayout.rendered = function(){
 
     // SKIN OPTIONS
     // Uncomment this if you want to have different skin option:
-    // Available skin: (skin-1 or skin-3, skin-2 deprecated)
+    // Available skin: (skin-1 or skin-3, skin-2 deprecated, md-skin)
     $('body').addClass('md-skin');
 
     // FIXED-SIDEBAR
@@ -53,4 +56,4 @@ Template.mainLayout.rendered = function(){
     // $('body').addClass('boxed-layout');
 
 
-};
+});

@@ -1,0 +1,97 @@
+<template name="nestableList">
+
+<!--
+    {{> pageHeading title='Launching Your App' }}
+-->
+
+    <div class="wrapper wrapper-content  animated fadeInRight">
+
+        <div class="row row-centered">
+            <div class="col-lg-8 col-centered">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Course Contents</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <p class="m-b-lg">
+                        </p>
+
+                        <div class="dd" id="nestable2">
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="1">
+                                    <div class="dd-handle dd-nodrag">
+                                        <span class="label label-unlock" style="background-color:white; color: green"><i class="fa fa-unlock"></i></span>
+                                      <a href="http://www.google.com/" target="_blank">Unit 1</a>:  Designing Your App
+                                    </div>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="2">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 12:00 pm </span>
+                                                <span class="label label-info" style="background-color:green; color: white"><i class="fa fa-check"></i></span>
+                                              Exercise 01
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="3">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 11:00 pm </span>
+                                                <span class="label label-info" style="background-color:green; color: white"><i class="fa fa-check"></i></span>
+                                              Exercise 02
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="4">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 11:00 pm </span>
+                                                <span class="label label-info" style="background-color:white; color: green"><i class="fa fa-unlock"></i></span>
+                                              Exercise 02
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </li>
+<!-- By default, this block will start as collapsed: -->
+                                <li class="dd-item" data-id="5">
+
+                                    <div class="dd-handle">
+                                        <span class="label label-warning" style="background-color:lightgray; color:darkgray"><i class="fa fa-lock"></i></span>
+                                      Unit 2: Putting your App on the Web
+                                    </div>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="6">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 15:00 pm </span>
+                                                <span class="label label-warning" style="background-color:lightgray; color:darkgray"><i class="fa fa-lock"></i></span>
+                                              Exercise 01
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="7">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 16:00 pm </span>
+                                                <span class="label label-warning" style="background-color:lightgray; color:darkgray"><i class="fa fa-lock"></i></span>
+                                              Exercise 02
+                                            </div>
+                                        </li>
+                                        <li class="dd-item" data-id="8">
+                                            <div class="dd-handle">
+                                                <span class="pull-right"> 21:00 pm </span>
+                                                <span class="label label-warning" style="background-color:lightgray; color:darkgray"><i class="fa fa-lock"></i></span>
+                                              Exercise 03
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+<!--
+                      <div class="m-t-md">
+                            <h5>Serialised Output</h5>
+                        </div>
+
+                        <textarea id="nestable2-output" class="form-control"></textarea>
+-->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
