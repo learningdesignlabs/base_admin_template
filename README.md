@@ -1,14 +1,9 @@
-Inspinia - Meteor version 2015
-version: 2.3
-
-Meteor.js is an open-source platform built on Node and MongoDB
-See documentation of Meteor to learn more: http://docs.meteor.com/#/full/
-Install Meteor: https://www.meteor.com/install
-Be sure that you have all setup - create the Meteor project and run the sample application: https://www.meteor.com/try
-
-INSPINIA first run - just cd into Inspinia Meteor project and run the application with:
-
-meteor
-
-This will grab the necessary packages, bundle all the css and js and start your application
-Go to http://localhost:3000 to see live version
+* Contains most jQuery plugins from the original theme
+* Upgrade to 1.3
+  * Import template, associated .html file
+  * onRendered(function{...}) instead of onrenderd = function{...
+* Nestable works
+* Migrated to Flow Router
+* Migrated plugins to via the following methods:
+  * If there was a straight Atmosphere port, commented out the plugin contents, and added the meteor version
+  * If not, added the node version via meteor npm install --save <name_of_package>
